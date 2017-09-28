@@ -1,0 +1,17 @@
+{
+  "name": "base-2n",
+  "version": "1.0.0",
+  "description": "Fast base encoding / decoding of any given alphabet for only 2^n patterns.",
+  "main": "index.js",
+  "license": "MIT",
+  "author": "7korobi",
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "postinstall": "coffee -t -o index.js ./src/index.coffee"
+  },
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "coffeescript": "^2.0.1"
+  }
+}
