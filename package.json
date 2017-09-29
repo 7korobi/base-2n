@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "postinstall": "coffee -t -o index.js ./src/index.coffee"
+    "postinstall": "coffee --map --transpile -o index.js ./src/index.coffee"
   },
   "dependencies": {
     "babel-core": "^6.26.0",

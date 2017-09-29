@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "index.js",
+  "sourceRoot": "",
+  "sources": [
+    "src\\index.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA,eAAe,UAAA,AAAC,MAAD,AAAO,KACpB;MAAA;AAAA,MAA0B,AAAG,IAAH,AAAI,AAAS,SAAC,KAAxC,AAAuC,AAAM;AAA7C,UAAM,MAAN,AAAM,AAAM;;AACZ,SAAO,AAAG,IAAC;AACX,WAAS;AACT,WAAS;AAET,OAAA,4CAAA;;AACE,AAAO,WAAP,AAAO,KADT,AACc;;;AAEd,WAAO,UAAA,AAAC,MACN;UAAA;AAAA,YAAM;AACN,aAAO;AACP,eAAS;AAET,aAAO;AACP,cAAQ,KAAK;AACb,aAAO,QAAQ;AACf,WAAA,mCAAA;;AACE,YAAI,AAAO,OAAA;AACX,YAAO,KAAP;AACE,AAAO,kBAAP,AAAQ,AAAM,MAAA,mBAAA,AAAmB,CAAjC,AAAc,AACd;iBAFF,AAES;;AAET,kBAAU,IAAI;AACd,gBAAQ,AAER;eAAM,QAAN,AAAc;AACZ,gBAAM,CAAC,SAAD,AAAU,AAAK,MAAf,AAAgB,SAAhB,AAAyB,MAAM;AACrC,qBAAW;AACX,mBAHF,AAGW;AAZb;;aARK,AAqBL;AArBF;AAuBA,cAAU,UAAA,AAAC,MAAD,AAAO,QACf;UAAA;AAAA,aAAO,CAAC,KAAD,AAAM,QAAQ;AAErB,YAAM;AACN,WAAa,mFAAb;AACE,YAAI,QAAQ,AAEZ;gBAAA;iBACO,IAAI,KADX,AACgB;AACZ,mBAAO;;AAFX;iBAIO,IAJP,AAIW;AACP,mBAAO,CAAC,AAAS,SAAC,QAAX,AAAU,AAAU,MAAQ;;AALvC;eAOO,MAPP,AAOY;AACR,mBAAO,SADJ,AACa;;AARpB;iBAUO,IAVP,AAUW;AACP,mBAAO,CAAC,AAAS,SAAC,QAAQ,CAAnB,AAAU,AAAU,MAAO,CAbtC,AAEA,AAWuC;;;AAGvC,eAAO,AAAO,OAjBhB,AAiBgB;;aArBR,AAsBR;AAtDW,AASb;AAAA",
+  "sourcesContent": [
+    "export default (bits, abc)->\n  throw Error \"記号が足りません\" if abc.length < (1 << bits)\n  size = abc.length\n  decode = {}\n  encode = abc\n\n  for c, n in abc\n    decode[c] = n\n\n  toHex: (code)->\n    str = \"\"\n    base = 1\n    buffer = 0\n\n    bits = 4\n    limit = 1 << bits\n    mask = limit - 1\n    for c in code by -1\n      n = decode[c]\n      unless n?\n        console.error \"decode error on #{c}\"\n        return null\n\n      buffer += n * base\n      base *= size\n\n      while base >= limit\n        str = (buffer & mask).toString(16) + str\n        buffer >>= bits\n        base >>= bits\n    str\n\n  byNumber: (size, buffer)->\n    mask = (1 << bits) - 1\n\n    str = \"\"\n    for index in [size * 8 .. 0] by -bits\n      n = index - bits\n\n      switch\n        when n > 31 - bits\n          code = 0\n#          console.warn [n]\n        when n > 0\n          code = (buffer & (mask <<  n)) >>  n\n#          console.warn [n, [ buffer, (mask << n), code].map (it)-> it.toString(2)]\n        when n == 0\n          code = buffer & mask\n#          console.warn [n, [ buffer, mask, code].map (it)-> it.toString(2)]\n        when 0 > n\n          code = (buffer & (mask >> -n)) << -n\n#          console.warn [n, [ buffer, (mask >> -n), code].map (it)-> it.toString(2)]\n\n      str += encode[code]\n    str"
+  ]
+}

@@ -128,13 +128,6 @@ balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
 
-base-2n@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/base-2n/-/base-2n-1.0.0.tgz#4c081fce1fa17553af67aca6a7f55b82d699950b"
-  dependencies:
-    babel-core "^6.26.0"
-    coffeescript "^2.0.1"
-
 brace-expansion@^1.1.7:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-1.1.8.tgz#c07b211c7c952ec1f8efd51a77ef0d1d3990a292"

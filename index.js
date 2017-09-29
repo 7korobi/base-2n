@@ -66,3 +66,4 @@ export default function (bits, abc) {
     }
   };
 };
+//# sourceMappingURL=index.js.map
